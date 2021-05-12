@@ -69,3 +69,68 @@ shp <- shp[order(shp$region),]
 #shp<-shp[-88,]
 shp$region[88]<- "Hackney and City of London"
 shp <- shp[order(shp$region),]
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################
+
+#removing walsch regions
+shp_england<-shp
+
+#Blaenau Gwent
+shp_england$region[23]
+#Bridgend
+shp_england$region[34]
+#Caerphilly
+shp_england$region[44]
+#Cardiff
+shp_england$region[50]
+#Carmarthenshire
+shp_england$region[52]
+#Ceredigion
+shp_england$region[55]
+#Conwy
+shp_england$region[67]
+#Denbighshire
+shp_england$region[81]
+#Flintshire
+shp_england$region[109]
+#Gwynedd
+shp_england$region[121]
+#Isle of Anglesey
+shp_england$region[146]
+#Merthyr Tydfil
+shp_england$region[174]
+#Monmouthshire
+shp_england$region[182]
+#Neath Port Talbot
+shp_england$region[183]
+#Newport
+shp_england$region[189]
+#Pembrokeshire
+shp_england$region[209]
+#Powys
+shp_england$region[214]
+#Rhondda Cynon Taf
+shp_england$region[221]
+#Swansea
+shp_england$region[281]
+#Torfaen
+shp_england$region[296]
+#Vale of Glamorgan
+shp_england$region[302]
+#Wrexham
+shp_england$region[332]
+
+
+shp_england<-shp_england[-c(23,34,44,50,52,55,67,81,109,121,146,174,182,183,189,209,214,221,281,296,302,332),]
