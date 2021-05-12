@@ -1,7 +1,14 @@
-#creating geomaps
+#install packages
+
+install.packages(plyr)
+install.packages(httr)
+
+
+
+#creating geomaps of casees
 #before you use this code run shape_files_LTLA.r.
 
-#enter reference date in format "YYYY-MM-DD"
+#enter reference date in format "YYYY-MM-DD"  (i.e. the date of interest)
 ref_date<-as.Date("2021-05-06")
 ref_date_1<-as.Date(ref_date)-21
 dat<- seq( as.Date(ref_date_1), by=1, len=22)
@@ -9,7 +16,7 @@ dat<- seq( as.Date(ref_date_1), by=1, len=22)
 
 
 #import UK_regions. This includes regional information such as population and area at
-#lower tier local authority level incluing 337 regions
+#lower tier local authority level including 337 regions
 UK_regions<- rio::import("C:/Users/Owner/Desktop/COVID/Paper_V3/data/UK_regions.xlsx")
 
 
@@ -102,15 +109,15 @@ list(
 
 
 #format all UK cases
-library(plyr)
 
+library(plyr)
 
 
 #uk daily cases (empty for now)
 output <- matrix(ncol=22, nrow=337)
 
 
-#formatting -alligning regions with daily cases looking at reference date and 21 days beforehand.
+#formatting -aligning regions with daily cases looking at reference date and 21 days beforehand.
 for(i in 1:length(dat)){
   
   
@@ -138,7 +145,7 @@ output <- data.frame(output)
 
 
 
-#change the column names to the date
+#change the column names to the dates
 colnames(output)<-dat
 
 
@@ -254,15 +261,17 @@ head(number_days)
 
 
 
-#shp are shapefile obtained using script file shape_files_LTLA. It contains
-# 337 regions at LTLA level. Run this code before continuing.
+#shp is obtained using script file importing_shapefiles_LTLA.R. It contains
+# 337 regions at LTLA level. Run this code before continuing. This is
+#needed to create the geomaps
+
 
 
 #add column of number of cases since at least one case to shp
 shp$"Days since the most recent case"<-number_days[,1]
 
 
-#geomap results
+#create geomap
 tm_shape(shp) +
   tm_polygons(col="Days since the most recent case",n=21,breaks=c(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21),labels=c("0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"),palette=c("#FF0000", "#FF3300", "#FF6600", "#FF9900", "#FFFF00", "#FFFF33", "#FFFF66", "#FFFF99", "#FFFFCC", "#CCFFFF", "#99FFFF", "#66FFFF", "#33FFFF", "#00FFFF", "#66CCFF", "#3399FF", "#0066CC", "#003399", "#0000FF", "#0000CC", "#000099"))+
   tm_layout(legend.outside = TRUE, main.title = paste(ref_date))+
