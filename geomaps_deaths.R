@@ -1,16 +1,23 @@
+#install packages
+
+install.packages(plyr)
+install.packages(httr)
+
+
+
 #death
 #creating geomaps
-#before you use this code run shape_files_LTLA.r.
+#before you use this code run importing_shapefiles_LTLA.R.
 
-#enter reference date in format "YYYY-MM-DD"
+#enter reference date in format "YYYY-MM-DD" (i.e. the date of interest)
 ref_date<-as.Date("2020-04-01")
 ref_date_1<-as.Date(ref_date)-21
 dat<- seq( as.Date(ref_date_1), by=1, len=22)
 
 
 
-#import UK_regions. This includes regional information such as population and area at
-#lower tier local authority level incluing 337 regions
+#import UK_regions_Wales_removed. This includes regional information such as population and area at
+#lower tier local authority level incluing 315 regions
 UK_regions_Wales_removed<- rio::import("C:/Users/Owner/Documents/GitHub/regional_COVID_geoplots/UK_regions_wales_removed.xlsx")
 
 
@@ -103,16 +110,16 @@ list(
 
 
 
-#format all UK death
+#format all england death
 library(plyr)
 
 
 
-#uk daily death (empty for now)
+#England daily death (empty for now)
 output <- matrix(ncol=22, nrow=315)
 
 
-#formatting -alligning regions with daily death looking at reference date and 21 days beforehand.
+#formatting -aligning regions with daily death looking at reference date and 21 days beforehand.
 for(i in 1:length(dat)){
   
   
@@ -160,7 +167,7 @@ colnames(daily_death)[25]
 #empty vector ready for number of day since the last death
 number_days<- data.frame(col=integer(315))
 
-#search for number of days until last death and store in the vector number_days
+#search for number of days until at least one death in each region and store in the vector number_days
 for(i in 1:315){
   
   if(daily_death[i,25-1]==0){
@@ -256,16 +263,13 @@ head(number_days)
 
 
 
-#shp are shapefile obtained using script file shape_files_LTLA. It contains
-# 337 regions at LTLA level. Run this code before continuing.
+#shp_england is obtained using script file shape_files_LTLA. It contains
+# 315 regions at LTLA level (excluding Wales). Run this code before continuing. This is
+#needed to create the geomaps
 
 
 
-
-
-
-
-#add column of number of death since at least one death to shp
+#add column of number of death since at least one death to shp_england
 shp_england$"Days since the most recent death"<-number_days[,1]
 
 
