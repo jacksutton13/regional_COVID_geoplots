@@ -10,7 +10,7 @@ install.packages(httr)
 #before you use this code run importing_shapefiles_LTLA.R.
 
 #enter reference date in format "YYYY-MM-DD" (i.e. the date of interest)
-ref_date<-as.Date("2020-04-01")
+ref_date<-as.Date("2020-07-25")
 ref_date_1<-as.Date(ref_date)-21
 dat<- seq( as.Date(ref_date_1), by=1, len=22)
 
