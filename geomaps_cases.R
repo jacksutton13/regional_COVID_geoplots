@@ -9,7 +9,7 @@ install.packages(httr)
 #before you use this code run shape_files_LTLA.r.
 
 #enter reference date in format "YYYY-MM-DD"  (i.e. the date of interest)
-ref_date<-as.Date("2021-05-06")
+ref_date<-as.Date("2020-07-25")
 ref_date_1<-as.Date(ref_date)-21
 dat<- seq( as.Date(ref_date_1), by=1, len=22)
 
@@ -278,6 +278,13 @@ tm_shape(shp) +
   tm_borders(lwd=0.5)
   
   
+#export as pdf
+mypath <- file.path("C:/Users/Owner/Documents/GitHub/regional_COVID_geoplots/geomaps/cases",paste(ref_date, sep = ""))
+mytitle = paste("")
+dev.copy(pdf, mypath,width=10, height=6)
+dev.off()
+
+
 
 
 
