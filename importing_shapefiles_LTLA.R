@@ -1,16 +1,24 @@
+#install librarys
+install.packages(sf)
+install.packages(raster)
+install.packages(dplyr)
+install.packages(spData)
+install.packages(tmap)
+install.packages(ggplot2)
+install.packages("png")
+install.packages(rgeos)
+
+
 library(sf)
 library(raster)
 library(dplyr)
 library(spData)
-
-
 library(tmap)    # for static and interactive maps
 library(ggplot2) # tidyverse data visualization package
 library(rgdal)
 library("png")
 library(rgeos)
-library(tmap)
-#match shapefiles so that they are identical to LTLA regions defined in datasets
+
 
 
 #download shape files, store in directory and import here.
@@ -24,9 +32,9 @@ shp4 <- shapefile("C:/Users/Owner/Desktop/COVID/COVID_update/geomap/Cornwall and
 shp5 <- shapefile("C:/Users/Owner/Desktop/COVID/COVID_update/geomap/england_remove_regions/england_lad_2011.shp")
 
 
-#the next chuck of code is some simple manipulation so that names of regions and regional cases are alighned to PHE
-#select all code and run.
-#bind shape files together
+#the next chunk of code is some simple manipulation so that names of regions and regional cases are alighned to PHE
+#simply select the next chunk of code and run (make sure pathways are updated).
+
 shp <- bind(shp2, shp3, shp4)
 shp<-shp[-c(25:41),]
 shp <- bind(shp, shp5)
@@ -71,20 +79,14 @@ shp$region[88]<- "Hackney and City of London"
 shp <- shp[order(shp$region),]
 
 
+#shp has 337 LTLA regions matching to Public Health England.
+#This can now be used to create geomaps of cases
+
+################################################
 
 
-
-
-
-
-
-
-
-
-
-############################
-
-#removing walsch regions
+#For geomaps of death we need to remove all welch regions
+#removing walch regions
 shp_england<-shp
 
 #Blaenau Gwent
@@ -134,3 +136,7 @@ shp_england$region[332]
 
 
 shp_england<-shp_england[-c(23,34,44,50,52,55,67,81,109,121,146,174,182,183,189,209,214,221,281,296,302,332),]
+
+
+#shp_england has 315 LTLA regions matching to Public Health England.
+#This can now be used to create geomaps of deaths
