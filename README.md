@@ -1,6 +1,6 @@
 # regional_COVID_geoplots
 Summary: 
-The intention of this code is to produce up-to-date geomaps of England and Wales that shows the number of days since the most recent
+The intention of this code is to produce up-to-date geomaps of England and Wales that show the number of days since the most recent
 case (England and Wales) and death (England only).
 
 How to use this code (step by step instructions): 
