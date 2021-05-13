@@ -93,7 +93,7 @@ query_structure <- list(
   date       = "date", 
   name       = "areaName", 
   code       = "areaCode", 
-  daily      = "newDeathsByDeathDate"
+  daily      = "newDeaths28DaysByDeathDate"
 )
 
 
